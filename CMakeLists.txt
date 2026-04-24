@@ -3,7 +3,13 @@ cmake_minimum_required(VERSION 3.15)
 # プログラム名をプロジェクト名と同じにする
 project(rosslers C)
 
-add_executable(${PROJECT_NAME} "rosslers.c")
+if(APPLE)
+    add_executable(${PROJECT_NAME} MACOSX_BUNDLE "rosslers.c")
+    # Xcode でプロジェクトを開いたときに起動できるようにスキームを生成する
+    set_target_properties(${PROJECT_NAME} PROPERTIES XCODE_GENERATE_SCHEME ON)
+else()
+    add_executable(${PROJECT_NAME} "rosslers.c")
+endif()
 
 if(WIN32)
     # Windows: プログラム名をスタートアッププロジェクトに設定
@@ -23,10 +29,10 @@ if(WIN32)
     )
     FetchContent_MakeAvailable(freeglut)
 
-    # freeglut のインクルードディレクトリを追加 (glut.h を見つけるため)
+    # glut.h を見つけるために freeglut のインクルードディレクトリを追加
     target_include_directories(${PROJECT_NAME} PRIVATE "${freeglut_SOURCE_DIR}/include" "${freeglut_SOURCE_DIR}/include/GL")
 
-    # freeglut ターゲットと OpenGL、GLU をリンク (Windows環境のC言語標準にはlibm相当の数学関数が含まれています)
+    # freeglut ターゲットと OpenGL, GLU をリンク
     target_link_libraries(${PROJECT_NAME} PRIVATE freeglut opengl32.lib glu32.lib)
 
     # 実行時に DLL が見つかるようにビルドディレクトリへコピー
