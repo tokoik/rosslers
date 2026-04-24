@@ -4,9 +4,20 @@ cmake_minimum_required(VERSION 3.15)
 project(rosslers C)
 
 if(APPLE)
-    add_executable(${PROJECT_NAME} MACOSX_BUNDLE "rosslers.c")
+    add_executable(${PROJECT_NAME} MACOSX_BUNDLE "rosslers.c" "opengl.icns")
+
     # Xcode でプロジェクトを開いたときに起動できるようにスキームを生成する
     set_target_properties(${PROJECT_NAME} PROPERTIES XCODE_GENERATE_SCHEME ON)
+
+    # macOS アプリケーションバンドルプロパティの設定
+    set_target_properties(${PROJECT_NAME} PROPERTIES
+        MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/Info.plist"
+        MACOSX_BUNDLE_BUNDLE_NAME "rosslers"
+        MACOSX_BUNDLE_BUNDLE_VERSION "1.0.0"
+        MACOSX_BUNDLE_SHORT_VERSION_STRING "1.0"
+        MACOSX_BUNDLE_GUI_IDENTIFIER "com.example.rosslers"
+        RESOURCE "opengl.icns"
+    )
 else()
     add_executable(${PROJECT_NAME} "rosslers.c")
 endif()
