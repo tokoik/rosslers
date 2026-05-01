@@ -1,14 +1,18 @@
-﻿#include <stdlib.h>
-#include <math.h>
-#if defined(__APPLE__) || defined(MACOSX)
+﻿#if defined(__APPLE__)
 #  define GL_SILENCE_DEPRECATION
 #  include <GLUT/glut.h>
+#  include <OpenGL/glext.h>
 #else
-#  if defined(WIN32)
-#    pragma comment(linker, "/subsystem:¥"windows¥" /entry:¥"mainCRTStartup¥"")
+#  if defined(_WIN32)
+//#    pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
+#    define _USE_MATH_DEFINES
+#    define _CRT_SECURE_NO_WARNINGS
 #  endif
 #  include <GL/glut.h>
+#  include <GL/glext.h>
 #endif
+#include <stdlib.h>
+#include <math.h>
 
 /*
 ** ステレオ表示の選択
