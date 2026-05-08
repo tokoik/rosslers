@@ -55,7 +55,7 @@ static int zoom=8;                     /* 拡大率 */
 
 static int vp,vh,zm;             /* menu ID's */
 
-void quit(void)
+void quit()
 {
 #if GAMEMODE
     glutLeaveGameMode();
@@ -133,7 +133,7 @@ void solv_de()
   }
 }
 
-void init_light(void)
+void init_light()
 {
   static GLfloat light_diffuse[]  = {1.0, 0.7, 0.7, 1.0};
   static GLfloat light_ambient[]  = {0.5, 0.5, 0.5, 1.0};
@@ -150,7 +150,7 @@ void init_light(void)
   glLightfv(GL_LIGHT2, GL_SPECULAR, light_specular);
 }
 
-void set_light(void)
+void set_light()
 {
   static GLfloat light_position0[] = {-20.0, 0.0, 10.0, 1.0};
   static GLfloat light_position1[] = { 20.0, 0.0,-10.0, 1.0};
@@ -208,7 +208,7 @@ void set_sight(double offset)
   }
 }
 
-void display_lane(void)
+void display_lane()
 {
   int i,j;
   GLdouble c1,c2,c3;
@@ -234,7 +234,7 @@ void display_lane(void)
   glEnd();
 }
 
-void display_tail(void)
+void display_tail()
 {
   int i;
   GLdouble c;
@@ -262,7 +262,7 @@ void ext_product(v1,v2,v3,nv)
     nv[i]=u[(i+1)%3]*w[(i+2)%3]-u[(i+2)%3]*w[(i+1)%3];
 }
 
-void display_plane(void)
+void display_plane()
 {
   int i;
   double u[3],rr;
@@ -330,7 +330,7 @@ void display_plane(void)
   glEnd();
 }
 
-void display_sun(void)
+void display_sun()
 {
   static GLfloat mat_diffuse[]   = {1.0, 0.5, 0.2, 1.0};
   static GLfloat mat_specular[]  = {0.5, 0.2, 0.1, 1.0};
@@ -344,7 +344,7 @@ void display_sun(void)
   glutSolidSphere(0.5,16,8);
 }
 
-void idle(void)
+void idle()
 {
   time++;
   if(time >= DATA_SIZE-10)
@@ -354,7 +354,7 @@ void idle(void)
   glutPostRedisplay();
 }
 
-void init(void)
+void init()
 {
   glClearColor(0.0, 0.0, 0.1, 0.0);
   glShadeModel(GL_SMOOTH);
@@ -368,7 +368,7 @@ void init(void)
   solv_de();
 }
 
-void scene(void)
+void scene()
 {
   set_light();
 
@@ -381,7 +381,7 @@ void scene(void)
   glDisable(GL_LIGHTING);
 }
 
-void display(void)
+void display()
 {
 #if STEREO == QUADBUF
   glDrawBuffer(GL_BACK_RIGHT);
@@ -551,7 +551,7 @@ void parameter(int sel)
   glutPostRedisplay();
 }
 
-void menu(void)
+void menu()
 {
 
   vh=glutCreateMenu(param_vh);
